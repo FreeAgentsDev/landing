@@ -1,0 +1,80 @@
+---
+import { translations, defaultLang } from '../../i18n/translations';
+const lang = (Astro.cookies.get('lang')?.value || defaultLang) as 'en' | 'es';
+const t = translations[lang];
+---
+
+<section id="cta" class="section cta-section">
+  <div class="container">
+    <div class="cta-container animate-on-scroll">
+      <div class="cta-content">
+        <h2 class="cta-title">{t['cta.title']} <span class="neon-text">{t['cta.titleHighlight']}</span></h2>
+        <p class="cta-description">
+          {t['cta.description']}
+        </p>
+        <div class="cta-buttons">
+          <a href="#pricing" class="btn btn-primary btn-lg animate-pulse">{t['cta.startTrial']}</a>
+          <a href="#" class="btn btn-secondary btn-lg">{t['cta.scheduleDemo']}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta-background"></div>
+</section>
+
+<style>
+  .cta-section {
+    position: relative;
+    padding: var(--spacing-24) 0;
+    overflow: hidden;
+  }
+  
+  .cta-container {
+    background-color: var(--color-teal-800);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-12) var(--spacing-8);
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    box-shadow: var(--shadow-xl);
+    border: 1px solid var(--color-teal-700);
+  }
+  
+  .cta-title {
+    margin-bottom: var(--spacing-4);
+  }
+  
+  .cta-description {
+    font-size: var(--font-size-lg);
+    color: var(--color-gray-200);
+    margin-bottom: var(--spacing-8);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .cta-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-4);
+    justify-content: center;
+  }
+  
+  .cta-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      radial-gradient(circle at 20% 80%, var(--color-teal-800) 0%, transparent 40%),
+      radial-gradient(circle at 80% 20%, var(--color-teal-700) 0%, transparent 40%);
+    z-index: 1;
+  }
+  
+  @media (min-width: 768px) {
+    .cta-container {
+      padding: var(--spacing-16);
+    }
+  }
+</style>

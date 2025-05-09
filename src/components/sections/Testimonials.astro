@@ -1,0 +1,78 @@
+---
+import { translations, defaultLang } from '../../i18n/translations';
+const lang = (Astro.cookies.get('lang')?.value || defaultLang) as 'en' | 'es';
+const t = translations[lang];
+
+const testimonials = [
+  {
+    content: t['testimonials.testimonial1.content'],
+    author: t['testimonials.testimonial1.author'],
+    role: t['testimonials.testimonial1.role']
+  },
+  {
+    content: t['testimonials.testimonial2.content'],
+    author: t['testimonials.testimonial2.author'],
+    role: t['testimonials.testimonial2.role']
+  },
+  {
+    content: t['testimonials.testimonial3.content'],
+    author: t['testimonials.testimonial3.author'],
+    role: t['testimonials.testimonial3.role']
+  }
+];
+---
+
+<section id="testimonials" class="section testimonials-section">
+  <div class="container">
+    <div class="section-header text-center animate-on-scroll">
+      <h2 class="section-title">{t['testimonials.title']} <span class="neon-text">{t['testimonials.titleHighlight']}</span></h2>
+      <p class="section-subtitle">{t['testimonials.subtitle']}</p>
+    </div>
+    
+    <div class="testimonials-container">
+      {testimonials.map((testimonial, index) => (
+        <div class="testimonial animate-on-scroll" style={`animation-delay: ${index * 0.2}s`}>
+          <div class="testimonial-content">
+            <p class="testimonial-text">"{testimonial.content}"</p>
+            <p class="testimonial-author">{testimonial.author}</p>
+            <p class="testimonial-role">{testimonial.role}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonials-section {
+    background-color: var(--color-teal-800);
+    position: relative;
+  }
+  
+  .testimonials-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-6);
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  .testimonial-text {
+    font-size: var(--font-size-lg);
+    line-height: 1.6;
+    color: var(--color-gray-200);
+    margin-bottom: var(--spacing-4);
+  }
+  
+  .testimonial-role {
+    color: var(--color-gray-400);
+    font-size: var(--font-size-sm);
+    margin: 0;
+  }
+  
+  @media (min-width: 768px) {
+    .testimonials-container {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

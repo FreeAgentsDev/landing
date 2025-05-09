@@ -1,0 +1,108 @@
+---
+import { defaultLang } from '../i18n/translations';
+---
+
+<div class="language-switch">
+  <button id="lang-btn" class="lang-btn" data-lang="en" aria-label="Translate" title="Translate">
+    <img id="lang-flag" src="/images/usa.png" alt="Translate" width="32" height="32" />
+  </button>
+</div>
+
+<style>
+  .language-switch {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    gap: 8px;
+  }
+
+  .lang-btn {
+    background: var(--color-teal-900);
+    border: 2.5px solid var(--color-primary);
+    border-radius: var(--border-radius-full);
+    padding: 2px;
+    cursor: pointer;
+    transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 12px rgba(0,255,255,0.10);
+    outline: none;
+    position: relative;
+  }
+
+  .lang-btn:focus {
+    outline: 2px solid var(--color-primary);
+    background: rgba(0,255,255,0.08);
+    border-color: var(--color-primary);
+  }
+
+  .lang-btn:hover {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    box-shadow: 0 4px 24px rgba(0,255,255,0.18);
+  }
+
+  .lang-btn img {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--border-radius-full);
+    display: block;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.13);
+    border: 2px solid white;
+    background: white;
+    transition: transform 0.5s cubic-bezier(.4,2,.6,1);
+  }
+
+  .lang-btn.animate img {
+    transform: rotateY(360deg) scale(1.08);
+  }
+</style>
+
+<script>
+  function getLangFromCookie() {
+    const match = document.cookie.match(/lang=(en|es)/);
+    return match ? match[1] : 'es';
+  }
+
+  function updateLangButton(animate = false) {
+    const lang = getLangFromCookie();
+    const nextLang = lang === 'es' ? 'en' : 'es';
+    const flag = lang === 'es' ? '/images/spain.png' : '/images/usa.png';
+    const tooltip = nextLang === 'es' ? 'Translate to: Español' : 'Translate to: English';
+    const btn = document.getElementById('lang-btn');
+    const img = document.getElementById('lang-flag');
+    if (btn && img) {
+      btn.setAttribute('data-lang', nextLang);
+      btn.setAttribute('aria-label', tooltip);
+      btn.setAttribute('title', tooltip);
+      img.setAttribute('src', flag);
+      img.setAttribute('alt', lang === 'es' ? 'Español' : 'English');
+      if (animate) {
+        btn.classList.add('animate');
+        setTimeout(() => btn.classList.remove('animate'), 600);
+      }
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    updateLangButton();
+    const btn = document.getElementById('lang-btn');
+    if (btn) {
+      btn.addEventListener('click', function () {
+        const nextLang = this.getAttribute('data-lang');
+        if (nextLang) {
+          document.cookie = `lang=${nextLang}; path=/; max-age=31536000`;
+          updateLangButton(true);
+          setTimeout(() => {
+            window.location.assign(window.location.pathname + window.location.search);
+          }, 400);
+        }
+      });
+    }
+  });
+</script>

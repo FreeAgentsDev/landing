@@ -1,0 +1,149 @@
+---
+import { translations, defaultLang } from '../../i18n/translations';
+const lang = (Astro.cookies.get('lang')?.value || defaultLang) as 'en' | 'es';
+const t = translations[lang];
+
+const pricingPlans = [
+  {
+    name: t['pricing.starterName'],
+    price: '$29',
+    period: t['pricing.period'],
+    description: t['pricing.starterDesc'],
+    features: [
+      t['pricing.starterFeature1'],
+      t['pricing.starterFeature2'],
+      t['pricing.starterFeature3'],
+      t['pricing.starterFeature4'],
+      t['pricing.starterFeature5'],
+    ],
+    buttonText: t['pricing.starterBtn'],
+    highlight: false
+  },
+  {
+    name: t['pricing.growthName'],
+    price: '$79',
+    period: t['pricing.period'],
+    description: t['pricing.growthDesc'],
+    features: [
+      t['pricing.growthFeature1'],
+      t['pricing.growthFeature2'],
+      t['pricing.growthFeature3'],
+      t['pricing.growthFeature4'],
+      t['pricing.growthFeature5'],
+      t['pricing.growthFeature6'],
+      t['pricing.growthFeature7'],
+    ],
+    buttonText: t['pricing.growthBtn'],
+    highlight: true
+  },
+  {
+    name: t['pricing.enterpriseName'],
+    price: '$199',
+    period: t['pricing.period'],
+    description: t['pricing.enterpriseDesc'],
+    features: [
+      t['pricing.enterpriseFeature1'],
+      t['pricing.enterpriseFeature2'],
+      t['pricing.enterpriseFeature3'],
+      t['pricing.enterpriseFeature4'],
+      t['pricing.enterpriseFeature5'],
+      t['pricing.enterpriseFeature6'],
+      t['pricing.enterpriseFeature7'],
+      t['pricing.enterpriseFeature8'],
+      t['pricing.enterpriseFeature9'],
+    ],
+    buttonText: t['pricing.enterpriseBtn'],
+    highlight: false
+  }
+];
+---
+
+<section id="pricing" class="section pricing-section">
+  <div class="container">
+    <div class="section-header text-center animate-on-scroll">
+      <h2 class="section-title">{t['pricing.title']}</h2>
+      <p class="section-subtitle">{t['pricing.subtitle']}</p>
+    </div>
+    
+    <div class="pricing-grid grid-3">
+      {pricingPlans.map((plan) => (
+        <div class={`pricing-card ${plan.highlight ? 'highlight' : ''} animate-on-scroll`}>
+          <div class="pricing-header">
+            <h3 class="pricing-name">{plan.name}</h3>
+            <div class="pricing-price">{plan.price} <span class="pricing-period">{plan.period}</span></div>
+            <p class="pricing-description">{plan.description}</p>
+          </div>
+          
+          <ul class="pricing-features">
+            {plan.features.map((feature) => (
+              <li>{feature}</li>
+            ))}
+          </ul>
+          
+          <div class="pricing-button">
+            <a href="#cta" class={`btn ${plan.highlight ? 'btn-primary' : 'btn-secondary'} btn-lg`}>{plan.buttonText}</a>
+          </div>
+        </div>
+      ))}
+    </div>
+    
+    <div class="pricing-guarantee text-center mt-12 animate-on-scroll">
+      <p>{t['pricing.guarantee']}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .pricing-section {
+    background-color: var(--color-teal-900);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .pricing-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      radial-gradient(circle at 0% 0%, var(--color-teal-800) 0%, transparent 30%),
+      radial-gradient(circle at 100% 100%, var(--color-teal-800) 0%, transparent 30%);
+    opacity: 0.6;
+    z-index: 0;
+  }
+  
+  .section-header {
+    position: relative;
+    z-index: 1;
+    margin-bottom: var(--spacing-12);
+  }
+  
+  .pricing-grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-8);
+  }
+  
+  .pricing-period {
+    font-size: var(--font-size-base);
+    color: var(--color-gray-400);
+    font-weight: var(--font-weight-normal);
+  }
+  
+  .pricing-guarantee {
+    color: var(--color-gray-400);
+    font-style: italic;
+    position: relative;
+    z-index: 1;
+  }
+  
+  @media (min-width: 768px) {
+    .pricing-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

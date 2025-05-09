@@ -1,0 +1,20 @@
+{
+  "name": "freeagents-landing",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@nanostores/i18n": "^1.0.0",
+    "@nanostores/persistent": "^0.9.1",
+    "@tailwindcss/vite": "^4.1.6",
+    "astro": "^5.2.5",
+    "nanostores": "^0.9.5",
+    "tailwindcss": "^4.1.6"
+  }
+}

@@ -1,0 +1,503 @@
+---
+import { translations, defaultLang } from '../../i18n/translations';
+const lang = (Astro.cookies.get('lang')?.value || defaultLang) as 'en' | 'es';
+const t = translations[lang];
+---
+
+<section id="features" class="section features-section">
+  <div class="container">
+    <div class="section-header text-center animate-on-scroll">
+      <h2 class="section-title">{t['features.title']} <span class="neon-text">{t['features.titleHighlight']}</span></h2>
+      <p class="section-subtitle">{t['features.subtitle']}</p>
+    </div>
+    
+    <div class="features-container">
+      <div class="feature-grid grid-2">
+        <div class="feature-image animate-on-scroll">
+          <div class="feature-graphic">
+            <div class="feature-ui-mockup">
+              <div class="ui-header"></div>
+              <div class="ui-content">
+                <div class="ui-line"></div>
+                <div class="ui-line"></div>
+                <div class="ui-line"></div>
+                <div class="ui-chart"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="feature-content animate-on-scroll">
+          <h3 class="feature-title">{t['features.analyticsTitle']}</h3>
+          <p class="feature-description">{t['features.analyticsDesc']}</p>
+          <ul class="feature-list">
+            <li>{t['features.analyticsBullet1']}</li>
+            <li>{t['features.analyticsBullet2']}</li>
+            <li>{t['features.analyticsBullet3']}</li>
+            <li>{t['features.analyticsBullet4']}</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="feature-grid grid-2 feature-reverse">
+        <div class="feature-content animate-on-scroll">
+          <h3 class="feature-title">{t['features.workflowTitle']}</h3>
+          <p class="feature-description">{t['features.workflowDesc']}</p>
+          <ul class="feature-list">
+            <li>{t['features.workflowBullet1']}</li>
+            <li>{t['features.workflowBullet2']}</li>
+            <li>{t['features.workflowBullet3']}</li>
+            <li>{t['features.workflowBullet4']}</li>
+          </ul>
+        </div>
+        
+        <div class="feature-image animate-on-scroll">
+          <div class="feature-graphic">
+            <div class="feature-workflow-mockup">
+              <div class="workflow-node workflow-start">{t['features.workflowStart']}</div>
+              <div class="workflow-connection"></div>
+              <div class="workflow-node workflow-process">{t['features.workflowProcess']}</div>
+              <div class="workflow-branch">
+                <div class="workflow-connection branch-left"></div>
+                <div class="workflow-connection branch-right"></div>
+              </div>
+              <div class="workflow-nodes-row">
+                <div class="workflow-node workflow-condition">{t['features.workflowYes']}</div>
+                <div class="workflow-node workflow-condition">{t['features.workflowNo']}</div>
+              </div>
+              <div class="workflow-connections-join">
+                <div class="workflow-connection join-left"></div>
+                <div class="workflow-connection join-right"></div>
+              </div>
+              <div class="workflow-node workflow-end">{t['features.workflowEnd']}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="feature-grid grid-2">
+        <div class="feature-image animate-on-scroll">
+          <div class="feature-graphic">
+            <div class="feature-collab-mockup">
+              <div class="collab-user collab-user-1">
+                <div class="collab-avatar"></div>
+                <div class="collab-status"></div>
+              </div>
+              <div class="collab-user collab-user-2">
+                <div class="collab-avatar"></div>
+                <div class="collab-status"></div>
+              </div>
+              <div class="collab-user collab-user-3">
+                <div class="collab-avatar"></div>
+                <div class="collab-status"></div>
+              </div>
+              <div class="collab-document">
+                <div class="collab-line"></div>
+                <div class="collab-line"></div>
+                <div class="collab-line"></div>
+                <div class="collab-cursor"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="feature-content animate-on-scroll">
+          <h3 class="feature-title">{t['features.collabTitle']}</h3>
+          <p class="feature-description">{t['features.collabDesc']}</p>
+          <ul class="feature-list">
+            <li>{t['features.collabBullet1']}</li>
+            <li>{t['features.collabBullet2']}</li>
+            <li>{t['features.collabBullet3']}</li>
+            <li>{t['features.collabBullet4']}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .features-section {
+    background-color: var(--color-teal-800);
+    position: relative;
+  }
+  
+  .features-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-20);
+  }
+  
+  .feature-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-8);
+    align-items: center;
+  }
+  
+  .feature-title {
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-4);
+  }
+  
+  .feature-description {
+    color: var(--color-gray-300);
+    margin-bottom: var(--spacing-6);
+    line-height: 1.6;
+  }
+  
+  .feature-list {
+    padding-left: var(--spacing-6);
+    margin-bottom: 0;
+  }
+  
+  .feature-list li {
+    color: var(--color-gray-200);
+    margin-bottom: var(--spacing-2);
+    position: relative;
+  }
+  
+  .feature-list li::before {
+    content: "✓";
+    color: var(--color-primary);
+    position: absolute;
+    left: -25px;
+  }
+  
+  .feature-graphic {
+    background-color: var(--color-teal-700);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-6);
+    box-shadow: var(--shadow-lg);
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  /* UI Mockup Styles */
+  .feature-ui-mockup {
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-teal-800);
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  .ui-header {
+    height: 40px;
+    background-color: var(--color-teal-900);
+    display: flex;
+    align-items: center;
+    padding: 0 var(--spacing-4);
+  }
+  
+  .ui-content {
+    padding: var(--spacing-4);
+    height: calc(100% - 40px);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .ui-line {
+    height: 12px;
+    background-color: var(--color-teal-600);
+    border-radius: 3px;
+    margin-bottom: var(--spacing-3);
+    width: 100%;
+    opacity: 0.7;
+  }
+  
+  .ui-line:nth-child(2) {
+    width: 85%;
+  }
+  
+  .ui-line:nth-child(3) {
+    width: 65%;
+  }
+  
+  .ui-chart {
+    flex-grow: 1;
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    padding-top: var(--spacing-4);
+  }
+  
+  .ui-chart::before {
+    content: "";
+    display: block;
+    width: 15%;
+    height: 60%;
+    background: linear-gradient(to top, var(--color-primary), var(--color-cyan-300));
+    border-radius: 3px 3px 0 0;
+  }
+  
+  .ui-chart::after {
+    content: "";
+    display: block;
+    width: 15%;
+    height: 80%;
+    background: linear-gradient(to top, var(--color-primary), var(--color-cyan-300));
+    border-radius: 3px 3px 0 0;
+  }
+  
+  /* Workflow Mockup Styles */
+  .feature-workflow-mockup {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-4) 0;
+  }
+  
+  .workflow-node {
+    background-color: var(--color-primary);
+    color: var(--color-teal-900);
+    font-weight: var(--font-weight-medium);
+    padding: var(--spacing-2) var(--spacing-4);
+    border-radius: var(--border-radius-md);
+    text-align: center;
+    z-index: 2;
+  }
+  
+  .workflow-start {
+    background-color: var(--color-teal-500);
+    color: white;
+  }
+  
+  .workflow-end {
+    background-color: var(--color-secondary);
+    color: white;
+  }
+  
+  .workflow-connection {
+    height: 30px;
+    width: 2px;
+    background-color: var(--color-primary);
+    margin: 5px 0;
+    position: relative;
+  }
+  
+  .workflow-connection::before,
+  .workflow-connection::after {
+    content: "";
+    position: absolute;
+    background-color: var(--color-primary);
+  }
+  
+  .workflow-branch {
+    display: flex;
+    width: 100%;
+    max-width: 200px;
+    justify-content: center;
+    position: relative;
+  }
+  
+  .workflow-branch::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 15px;
+    background-color: var(--color-primary);
+  }
+  
+  .branch-left,
+  .branch-right {
+    width: 40%;
+    height: 2px;
+    margin: 0;
+  }
+  
+  .branch-left {
+    transform: translate(-30%, 15px) rotate(-45deg);
+  }
+  
+  .branch-right {
+    transform: translate(30%, 15px) rotate(45deg);
+  }
+  
+  .workflow-nodes-row {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    max-width: 200px;
+  }
+  
+  .workflow-condition {
+    padding: var(--spacing-1) var(--spacing-3);
+    min-width: 50px;
+  }
+  
+  .workflow-connections-join {
+    display: flex;
+    width: 100%;
+    max-width: 200px;
+    justify-content: center;
+    position: relative;
+  }
+  
+  .join-left,
+  .join-right {
+    width: 40%;
+    height: 2px;
+    margin: 0;
+  }
+  
+  .join-left {
+    transform: translate(-30%, -15px) rotate(45deg);
+  }
+  
+  .join-right {
+    transform: translate(30%, -15px) rotate(-45deg);
+  }
+  
+  .workflow-connections-join::after {
+    content: "";
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 15px;
+    background-color: var(--color-primary);
+  }
+  
+  /* Collaboration Mockup Styles */
+  .feature-collab-mockup {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  
+  .collab-user {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--spacing-4);
+    position: absolute;
+  }
+  
+  .collab-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: var(--shadow-md);
+  }
+  
+  .collab-status {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid var(--color-teal-700);
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+  
+  .collab-user-1 {
+    top: 10%;
+    left: 10%;
+  }
+  
+  .collab-user-1 .collab-avatar {
+    background-color: var(--color-primary);
+  }
+  
+  .collab-user-1 .collab-status {
+    background-color: #22c55e;
+  }
+  
+  .collab-user-2 {
+    top: 15%;
+    right: 15%;
+  }
+  
+  .collab-user-2 .collab-avatar {
+    background-color: var(--color-secondary);
+  }
+  
+  .collab-user-2 .collab-status {
+    background-color: #22c55e;
+  }
+  
+  .collab-user-3 {
+    top: 25%;
+    left: 40%;
+  }
+  
+  .collab-user-3 .collab-avatar {
+    background-color: #9333ea;
+  }
+  
+  .collab-user-3 .collab-status {
+    background-color: #a3a3a3;
+  }
+  
+  .collab-document {
+    position: absolute;
+    bottom: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 40%;
+    background-color: var(--color-teal-900);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-4);
+    box-shadow: var(--shadow-lg);
+  }
+  
+  .collab-line {
+    height: 12px;
+    background-color: var(--color-teal-600);
+    border-radius: 3px;
+    margin-bottom: var(--spacing-3);
+    width: 100%;
+  }
+  
+  .collab-line:nth-child(2) {
+    width: 80%;
+  }
+  
+  .collab-line:nth-child(3) {
+    width: 60%;
+  }
+  
+  .collab-cursor {
+    width: 2px;
+    height: 20px;
+    background-color: var(--color-primary);
+    position: absolute;
+    left: 30%;
+    bottom: 45%;
+    animation: blink 1s infinite;
+  }
+  
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+  
+  @media (min-width: 768px) {
+    .feature-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    
+    .feature-reverse {
+      direction: rtl;
+    }
+    
+    .feature-reverse > * {
+      direction: ltr;
+    }
+  }
+</style>
