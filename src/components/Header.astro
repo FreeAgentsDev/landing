@@ -24,7 +24,9 @@ const t = translations[lang];
       </nav>
       
       <div class="header-actions">
-        <LanguageSwitch />
+        <div class="language-switch-container">
+          <LanguageSwitch />
+        </div>
         <button class="menu-toggle" aria-label="Toggle menu" tabindex="0">
           <span class="hamburger"></span>
         </button>
@@ -60,6 +62,7 @@ const t = translations[lang];
     align-items: center;
     padding: 0.75rem 0;
     margin: 0 auto;
+    position: relative;
   }
 
   .logo {
@@ -71,6 +74,7 @@ const t = translations[lang];
     text-decoration: none;
     padding: 0.5rem;
     transition: all 0.3s ease;
+    z-index: 1001;
   }
 
   .logo:hover {
@@ -116,6 +120,12 @@ const t = translations[lang];
     display: flex;
     align-items: center;
     gap: 1rem;
+    z-index: 1001;
+  }
+
+  .language-switch-container {
+    position: relative;
+    z-index: 1002;
   }
 
   .menu-toggle {
@@ -125,6 +135,7 @@ const t = translations[lang];
     cursor: pointer;
     padding: 0.5rem;
     color: var(--color-gray-200);
+    z-index: 1001;
   }
 
   .hamburger {
@@ -167,34 +178,40 @@ const t = translations[lang];
 
     .main-nav {
       display: none;
-      position: absolute;
-      top: 100%;
+      position: fixed;
+      top: 0;
       left: 0;
       width: 100%;
+      height: 100vh;
       background-color: var(--color-teal-900);
-      border-bottom: 1px solid rgba(0, 230, 230, 0.1);
-      padding: 1rem;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 5rem 2rem 2rem;
+      z-index: 1000;
     }
 
     .main-nav.show {
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .main-nav ul {
       flex-direction: column;
-      gap: 1rem;
-      align-items: stretch;
+      gap: 1.5rem;
+      align-items: center;
+      width: 100%;
     }
 
     .main-nav a {
       display: block;
       text-align: center;
+      font-size: 1.25rem;
+      padding: 0.75rem 1.5rem;
     }
 
     .nav-cta {
       margin-left: 0;
       margin-top: 1rem;
+      width: 100%;
     }
 
     .nav-cta .btn {
@@ -204,6 +221,7 @@ const t = translations[lang];
 
     .menu-toggle {
       display: block;
+      margin-left: 1rem;
     }
 
     .menu-toggle.active .hamburger {
@@ -216,6 +234,12 @@ const t = translations[lang];
 
     .menu-toggle.active .hamburger::after {
       transform: rotate(-45deg) translate(5px, -5px);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .logo {
+      font-size: 1.25rem;
     }
   }
 </style>
@@ -241,12 +265,14 @@ const t = translations[lang];
     menuToggle?.addEventListener('click', () => {
       menuToggle.classList.toggle('active');
       mainNav?.classList.toggle('show');
+      document.body.style.overflow = mainNav?.classList.contains('show') ? 'hidden' : '';
     });
 
     menuLinks.forEach(link => {
       link.addEventListener('click', () => {
         menuToggle?.classList.remove('active');
         mainNav?.classList.remove('show');
+        document.body.style.overflow = '';
       });
     });
 
@@ -256,6 +282,7 @@ const t = translations[lang];
           mainNav?.classList.contains('show')) {
         menuToggle?.classList.remove('active');
         mainNav?.classList.remove('show');
+        document.body.style.overflow = '';
       }
     });
   });
