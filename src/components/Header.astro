@@ -10,6 +10,7 @@ const t = translations[lang];
   <div class="container">
     <div class="header-content">
       <a href="/" class="logo" aria-label="FreeAgents Home">
+        <img src="/favicon.png" alt="FreeAgents Logo" class="logo-icon" />
         <span class="neon-text">FreeAgents</span>
       </a>
       
@@ -77,9 +78,26 @@ const t = translations[lang];
     z-index: 1001;
   }
 
+  .logo-icon {
+    height: 80px; /* Aumentamos la altura de la imagen */
+    width: auto;   /* Mantiene la proporción de la imagen */
+    margin-right: 0.5rem; /* Espacio entre la imagen y el texto */
+    margin-bottom: -2rem;
+    margin-top: -3rem;
+  }
+
   .logo:hover {
     transform: scale(1.05);
-    text-shadow: var(--glow-primary);
+    /* Ajustamos la sombra para que no interfiera demasiado con el gradiente si es necesario */
+    /* text-shadow: var(--glow-primary); */
+  }
+  
+  .neon-text {
+    background: linear-gradient(45deg, var(--color-primary), var(--color-secondary)); /* Ejemplo de gradiente */
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent; /* Hacemos el color del texto transparente para mostrar el gradiente */
+    text-shadow: 0 0 8px rgba(0, 230, 230, 0.5), 0 0 15px rgba(0, 230, 230, 0.3); /* Sombra más sutil para el gradiente */
   }
 
   .main-nav ul {
