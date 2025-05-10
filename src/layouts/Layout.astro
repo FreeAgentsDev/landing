@@ -1,6 +1,4 @@
 ---
-import '../styles/global.css';
-
 interface Props {
   title?: string;
   description?: string;
@@ -13,7 +11,7 @@ const {
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -23,7 +21,7 @@ const {
     <title>{title}</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
   </head>
-  <body>
+  <body class="font-inter text-gray-100 bg-teal-900 overflow-x-hidden w-full max-w-[100vw]">
     <slot />
 
     <script>
@@ -34,7 +32,7 @@ const {
         const observer = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
-              entry.target.classList.add('animate-slideUp');
+              entry.target.classList.add('animate-fade-up');
               observer.unobserve(entry.target);
             }
           });
@@ -48,6 +46,53 @@ const {
   </body>
 </html>
 
-<style>
-  /* Additional global styles if needed */
+<style is:global>
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+
+  @layer components {
+    .animate-fade-up {
+      @apply opacity-0 translate-y-5 animate-[fadeUp_0.6s_ease-out_forwards];
+    }
+    
+    .neon-text {
+      @apply bg-gradient-to-r from-cyan-400 to-cyan-300 bg-clip-text text-transparent;
+    }
+
+    .btn {
+      @apply inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-md transition-all duration-300 whitespace-nowrap;
+    }
+
+    .btn-primary {
+      @apply bg-cyan-400 text-teal-900 hover:bg-cyan-300 hover:shadow-neon-sm hover:shadow-cyan-400/50 hover:-translate-y-0.5;
+    }
+
+    .btn-secondary {
+      @apply bg-transparent text-cyan-400 border-2 border-cyan-400 hover:bg-cyan-400/10 hover:shadow-neon-sm hover:shadow-cyan-400/50 hover:-translate-y-0.5;
+    }
+
+    .btn-lg {
+      @apply px-8 py-4 text-lg;
+    }
+
+    .container {
+      @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    }
+
+    .section {
+      @apply py-16 relative overflow-hidden;
+    }
+  }
+
+  @keyframes fadeUp {
+    from { 
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to { 
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 </style>
