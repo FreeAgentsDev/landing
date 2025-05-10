@@ -47,10 +47,6 @@ const pricingPlans = [
       t['pricing.enterpriseFeature3'],
       t['pricing.enterpriseFeature4'],
       t['pricing.enterpriseFeature5'],
-      t['pricing.enterpriseFeature6'],
-      t['pricing.enterpriseFeature7'],
-      t['pricing.enterpriseFeature8'],
-      t['pricing.enterpriseFeature9'],
     ],
     buttonText: t['pricing.enterpriseBtn'],
     highlight: false
@@ -65,12 +61,15 @@ const pricingPlans = [
       <p class="section-subtitle">{t['pricing.subtitle']}</p>
     </div>
     
-    <div class="pricing-grid grid-3">
+    <div class="pricing-grid">
       {pricingPlans.map((plan) => (
         <div class={`pricing-card ${plan.highlight ? 'highlight' : ''} animate-on-scroll`}>
           <div class="pricing-header">
             <h3 class="pricing-name">{plan.name}</h3>
-            <div class="pricing-price">{plan.price} <span class="pricing-period">{plan.period}</span></div>
+            <div class="pricing-price">
+              {plan.price}
+              <span class="pricing-period">{plan.period}</span>
+            </div>
             <p class="pricing-description">{plan.description}</p>
           </div>
           
@@ -81,13 +80,15 @@ const pricingPlans = [
           </ul>
           
           <div class="pricing-button">
-            <a href="#cta" class={`btn ${plan.highlight ? 'btn-primary' : 'btn-secondary'} btn-lg`}>{plan.buttonText}</a>
+            <a href="#cta" class={`btn ${plan.highlight ? 'btn-primary' : 'btn-secondary'} btn-lg`}>
+              {plan.buttonText}
+            </a>
           </div>
         </div>
       ))}
     </div>
     
-    <div class="pricing-guarantee text-center mt-12 animate-on-scroll">
+    <div class="pricing-guarantee text-center animate-on-scroll">
       <p>{t['pricing.guarantee']}</p>
     </div>
   </div>
@@ -98,52 +99,127 @@ const pricingPlans = [
     background-color: var(--color-teal-900);
     position: relative;
     overflow: hidden;
+    padding: var(--spacing-16) 0;
   }
   
-  .pricing-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1rem;
     width: 100%;
-    height: 100%;
-    background: 
-      radial-gradient(circle at 0% 0%, var(--color-teal-800) 0%, transparent 30%),
-      radial-gradient(circle at 100% 100%, var(--color-teal-800) 0%, transparent 30%);
-    opacity: 0.6;
-    z-index: 0;
   }
   
   .section-header {
-    position: relative;
-    z-index: 1;
     margin-bottom: var(--spacing-12);
   }
   
   .pricing-grid {
-    position: relative;
-    z-index: 1;
     display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--spacing-8);
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 0 1rem;
+  }
+  
+  .pricing-card {
+    background-color: var(--color-teal-800);
+    border-radius: var(--border-radius-lg);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    transition: all 0.3s ease;
+    border: 1px solid var(--color-teal-700);
+  }
+  
+  .pricing-card.highlight {
+    border: 2px solid var(--color-primary);
+    transform: translateY(-8px);
+    box-shadow: 0 4px 20px rgba(0, 230, 230, 0.1);
+  }
+  
+  .pricing-header {
+    text-align: center;
+  }
+  
+  .pricing-name {
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+  }
+  
+  .pricing-price {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-gray-100);
+    margin-bottom: 1rem;
   }
   
   .pricing-period {
-    font-size: var(--font-size-base);
+    font-size: 1rem;
     color: var(--color-gray-400);
-    font-weight: var(--font-weight-normal);
+    margin-left: 0.5rem;
+  }
+  
+  .pricing-description {
+    color: var(--color-gray-300);
+    margin-bottom: 1.5rem;
+  }
+  
+  .pricing-features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1;
+  }
+  
+  .pricing-features li {
+    color: var(--color-gray-200);
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+    position: relative;
+  }
+  
+  .pricing-features li::before {
+    content: "✓";
+    color: var(--color-primary);
+    position: absolute;
+    left: 0;
+  }
+  
+  .pricing-button {
+    margin-top: auto;
+  }
+  
+  .pricing-button .btn {
+    width: 100%;
+    justify-content: center;
   }
   
   .pricing-guarantee {
+    margin-top: var(--spacing-12);
     color: var(--color-gray-400);
-    font-style: italic;
-    position: relative;
-    z-index: 1;
   }
   
-  @media (min-width: 768px) {
+  @media (max-width: 1024px) {
     .pricing-grid {
-      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .pricing-section {
+      padding: var(--spacing-12) 0;
+    }
+    
+    .pricing-grid {
+      grid-template-columns: 1fr;
+      max-width: 400px;
+    }
+    
+    .pricing-card.highlight {
+      transform: none;
     }
   }
 </style>
