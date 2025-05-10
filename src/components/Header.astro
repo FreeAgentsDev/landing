@@ -6,266 +6,40 @@ const lang = (Astro.cookies.get('lang')?.value || defaultLang) as 'en' | 'es';
 const t = translations[lang];
 ---
 
-<header class="site-header">
+<header class="fixed top-0 left-0 right-0 w-full z-50 bg-teal-900/95 backdrop-blur-md transition-all duration-300 border-b border-cyan-400/10">
   <div class="container">
-    <div class="header-content">
-      <a href="/" class="logo" aria-label="FreeAgents Home">
-        <img src="/favicon.png" alt="FreeAgents Logo" class="logo-icon" />
+    <div class="flex justify-between items-center py-3 relative">
+      <a href="/" class="flex items-center text-2xl font-bold text-cyan-400 no-underline p-2 transition-all duration-300 z-[1001] hover:scale-105" aria-label="FreeAgents Home">
+        <img src="/favicon.png" alt="FreeAgents Logo" class="h-20 w-auto mr-2 -mb-8 -mt-12" />
         <span class="neon-text">FreeAgents</span>
       </a>
       
-      <nav class="main-nav" aria-label="Main navigation">
-        <ul>
-          <li><a href="#benefits">{t['nav.benefits']}</a></li>
-          <li><a href="#features">{t['nav.features']}</a></li>
-          <li><a href="#pricing">{t['nav.pricing']}</a></li>
-          <li><a href="#testimonials">{t['nav.testimonials']}</a></li>
-          <li class="nav-cta"><a href="#cta" class="btn btn-secondary">{t['nav.getStarted']}</a></li>
+      <nav class="main-nav z-50" aria-label="Main navigation">
+        <ul class="flex gap-8 items-center m-0 p-0 list-none">
+          <li><a href="#benefits" class="text-gray-200 no-underline font-medium p-2 transition-all duration-300 rounded-lg hover:text-cyan-400 hover:bg-cyan-400/10">{t['nav.benefits']}</a></li>
+          <li><a href="#features" class="text-gray-200 no-underline font-medium p-2 transition-all duration-300 rounded-lg hover:text-cyan-400 hover:bg-cyan-400/10">{t['nav.features']}</a></li>
+          <li><a href="#pricing" class="text-gray-200 no-underline font-medium p-2 transition-all duration-300 rounded-lg hover:text-cyan-400 hover:bg-cyan-400/10">{t['nav.pricing']}</a></li>
+          <li><a href="#testimonials" class="text-gray-200 no-underline font-medium p-2 transition-all duration-300 rounded-lg hover:text-cyan-400 hover:bg-cyan-400/10">{t['nav.testimonials']}</a></li>
+          <li class="ml-4"><a href="#cta" class="btn btn-secondary">{t['nav.getStarted']}</a></li>
         </ul>
       </nav>
       
-      <div class="header-actions">
-        <div class="language-switch-container">
+      <div class="flex items-center gap-4 z-[1001]">
+        <div class="relative z-[1002]">
           <LanguageSwitch />
         </div>
-        <button class="menu-toggle" aria-label="Toggle menu" tabindex="0">
-          <span class="hamburger"></span>
+        <button class="hidden md:block bg-transparent border-none cursor-pointer p-2 text-gray-200 z-[1001]" aria-label="Toggle menu" tabindex="0">
+          <span class="block w-6 h-0.5 bg-current relative transition-all duration-300"></span>
         </button>
       </div>
     </div>
   </div>
 </header>
 
-<style>
-  .site-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    z-index: 1000;
-    background-color: rgba(10, 49, 65, 0.95);
-    backdrop-filter: blur(8px);
-    transition: all 0.3s ease;
-    border-bottom: 1px solid rgba(0, 230, 230, 0.1);
-  }
-
-  .container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 1rem;
-    width: 100%;
-  }
-
-  .header-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.75rem 0;
-    margin: 0 auto;
-    position: relative;
-  }
-
-  .logo {
-    display: flex;
-    align-items: center;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--color-primary);
-    text-decoration: none;
-    padding: 0.5rem;
-    transition: all 0.3s ease;
-    z-index: 1001;
-  }
-
-  .logo-icon {
-    height: 80px; /* Aumentamos la altura de la imagen */
-    width: auto;   /* Mantiene la proporción de la imagen */
-    margin-right: 0.5rem; /* Espacio entre la imagen y el texto */
-    margin-bottom: -2rem;
-    margin-top: -3rem;
-  }
-
-  .logo:hover {
-    transform: scale(1.05);
-    /* Ajustamos la sombra para que no interfiera demasiado con el gradiente si es necesario */
-    /* text-shadow: var(--glow-primary); */
-  }
-  
-  .neon-text {
-    background: linear-gradient(45deg, var(--color-primary), var(--color-secondary)); /* Ejemplo de gradiente */
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent; /* Hacemos el color del texto transparente para mostrar el gradiente */
-    text-shadow: 0 0 8px rgba(0, 230, 230, 0.5), 0 0 15px rgba(0, 230, 230, 0.3); /* Sombra más sutil para el gradiente */
-  }
-
-  .main-nav ul {
-    display: flex;
-    gap: 2rem;
-    align-items: center;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .main-nav a {
-    color: var(--color-gray-200);
-    text-decoration: none;
-    font-weight: 500;
-    padding: 0.5rem;
-    transition: all 0.3s ease;
-    border-radius: 0.5rem;
-    white-space: nowrap;
-  }
-
-  .main-nav a:hover {
-    color: var(--color-primary);
-    background-color: rgba(0, 230, 230, 0.1);
-  }
-
-  .nav-cta {
-    margin-left: 1rem;
-  }
-
-  .nav-cta .btn {
-    padding: 0.5rem 1.25rem;
-    border: 2px solid var(--color-primary);
-    border-radius: 2rem;
-  }
-
-  .header-actions {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    z-index: 1001;
-  }
-
-  .language-switch-container {
-    position: relative;
-    z-index: 1002;
-  }
-
-  .menu-toggle {
-    display: none;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0.5rem;
-    color: var(--color-gray-200);
-    z-index: 1001;
-  }
-
-  .hamburger {
-    display: block;
-    width: 24px;
-    height: 2px;
-    background-color: currentColor;
-    position: relative;
-    transition: all 0.3s ease;
-  }
-
-  .hamburger::before,
-  .hamburger::after {
-    content: '';
-    position: absolute;
-    width: 24px;
-    height: 2px;
-    background-color: currentColor;
-    transition: all 0.3s ease;
-  }
-
-  .hamburger::before {
-    top: -8px;
-  }
-
-  .hamburger::after {
-    bottom: -8px;
-  }
-
-  @media (max-width: 1024px) {
-    .main-nav ul {
-      gap: 1.5rem;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .header-content {
-      padding: 0.5rem 0;
-    }
-
-    .main-nav {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100vh;
-      background-color: var(--color-teal-900);
-      padding: 5rem 2rem 2rem;
-      z-index: 1000;
-    }
-
-    .main-nav.show {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .main-nav ul {
-      flex-direction: column;
-      gap: 1.5rem;
-      align-items: center;
-      width: 100%;
-    }
-
-    .main-nav a {
-      display: block;
-      text-align: center;
-      font-size: 1.25rem;
-      padding: 0.75rem 1.5rem;
-    }
-
-    .nav-cta {
-      margin-left: 0;
-      margin-top: 1rem;
-      width: 100%;
-    }
-
-    .nav-cta .btn {
-      width: 100%;
-      display: block;
-    }
-
-    .menu-toggle {
-      display: block;
-      margin-left: 1rem;
-    }
-
-    .menu-toggle.active .hamburger {
-      background-color: transparent;
-    }
-
-    .menu-toggle.active .hamburger::before {
-      transform: rotate(45deg) translate(5px, 5px);
-    }
-
-    .menu-toggle.active .hamburger::after {
-      transform: rotate(-45deg) translate(5px, -5px);
-    }
-  }
-
-  @media (max-width: 480px) {
-    .logo {
-      font-size: 1.25rem;
-    }
-  }
-</style>
-
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const header = document.querySelector('.site-header');
-    const menuToggle = document.querySelector('.menu-toggle');
+    const header = document.querySelector('header');
+    const menuToggle = document.querySelector('button[aria-label="Toggle menu"]');
     const mainNav = document.querySelector('.main-nav');
     const menuLinks = document.querySelectorAll('.main-nav a');
 
@@ -273,9 +47,9 @@ const t = translations[lang];
     window.addEventListener('scroll', () => {
       const currentScroll = window.pageYOffset;
       if (currentScroll > lastScroll && currentScroll > 100) {
-        header?.classList.add('header-hidden');
+        header?.classList.add('-translate-y-full');
       } else {
-        header?.classList.remove('header-hidden');
+        header?.classList.remove('-translate-y-full');
       }
       lastScroll = currentScroll;
     });
@@ -305,3 +79,52 @@ const t = translations[lang];
     });
   });
 </script>
+
+<style>
+  @media (max-width: 768px) {
+    .main-nav {
+      @apply hidden fixed top-0 left-0 w-full h-screen bg-teal-900 pt-20 pb-8 px-8 z-50;
+    }
+
+    .main-nav.show {
+      @apply flex items-center justify-center;
+    }
+
+    .main-nav ul {
+      @apply flex-col gap-6 items-center w-full;
+    }
+
+    .main-nav a {
+      @apply block text-center text-xl py-3 px-6;
+    }
+
+    button[aria-label="Toggle menu"] {
+      @apply block;
+    }
+
+    button[aria-label="Toggle menu"].active span {
+      @apply bg-transparent;
+    }
+
+    button[aria-label="Toggle menu"] span::before,
+    button[aria-label="Toggle menu"] span::after {
+      @apply content-[''] absolute w-6 h-0.5 bg-current transition-all duration-300;
+    }
+
+    button[aria-label="Toggle menu"] span::before {
+      @apply -top-2;
+    }
+
+    button[aria-label="Toggle menu"] span::after {
+      @apply -bottom-2;
+    }
+
+    button[aria-label="Toggle menu"].active span::before {
+      @apply transform rotate-45 translate-y-2 translate-x-1;
+    }
+
+    button[aria-label="Toggle menu"].active span::after {
+      @apply transform -rotate-45 -translate-y-2 translate-x-1;
+    }
+  }
+</style>
