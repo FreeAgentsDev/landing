@@ -10,29 +10,24 @@ import { defaultLang } from '../i18n/translations';
 
 <style>
   .language-switch {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 1000;
-    display: flex;
-    gap: 8px;
+    position: relative;
+    z-index: 1002;
   }
 
   .lang-btn {
     background: var(--color-teal-900);
-    border: 2.5px solid var(--color-primary);
+    border: 2px solid var(--color-primary);
     border-radius: var(--border-radius-full);
     padding: 2px;
     cursor: pointer;
     transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
-    width: 44px;
-    height: 44px;
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
     box-shadow: 0 2px 12px rgba(0,255,255,0.10);
     outline: none;
-    position: relative;
   }
 
   .lang-btn:focus {
@@ -48,8 +43,8 @@ import { defaultLang } from '../i18n/translations';
   }
 
   .lang-btn img {
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
     border-radius: var(--border-radius-full);
     display: block;
     box-shadow: 0 2px 8px rgba(0,0,0,0.13);
@@ -60,6 +55,18 @@ import { defaultLang } from '../i18n/translations';
 
   .lang-btn.animate img {
     transform: rotateY(360deg) scale(1.08);
+  }
+
+  @media (max-width: 768px) {
+    .lang-btn {
+      width: 36px;
+      height: 36px;
+    }
+
+    .lang-btn img {
+      width: 24px;
+      height: 24px;
+    }
   }
 </style>
 
